@@ -105,13 +105,22 @@ public class App {
             );
 
             if (assessment == JOptionPane.OK_OPTION) {
-                float assessmentConverted = Float.parseFloat(textFieldassessment.getText());
-                
-               if (assessmentConverted >= 0) {
-                    System.out.println("Has introducido la nota");
-               } else {
-                    System.out.println("La valoriación es inválida");
-               }
+                try {
+                    float assessmentConverted = Float.parseFloat(textFieldassessment.getText());
+                    
+                    if (assessmentConverted >= 0) {
+                        System.out.println("Has introducido la nota");
+                    } else {
+                        System.out.println("La valoriación es inválida");
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(
+                        dialog,
+                        "Por favor, introduce un número válido",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                    );
+                }
             }
 
         });
