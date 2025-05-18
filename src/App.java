@@ -79,7 +79,17 @@ public class App {
             if (url == JOptionPane.OK_OPTION) {
                 String urlAI = textFieldURL.getText();
                 if (!urlAI.trim().isEmpty()) {
-                    System.out.println("Has introducido la WEB: " + urlAI);
+                    if (!urlAI.startsWith("https://") || !urlAI.startsWith("http://")) {
+                        JOptionPane.showMessageDialog(
+                            dialog,
+                            "Por favor, introduce una URL válida con http:// o https://",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                        );
+                        return;
+                    } else {
+                        System.out.println("Has introducido la WEB: " + urlAI);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(
                         dialog,
