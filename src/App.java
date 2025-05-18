@@ -1,8 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
+import net.salesianos.ripadbaisor.element.Elements;
+import net.salesianos.ripadbaisor.element.Element;
+import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) {
+
+        // Crear la lista de IA
+        Elements listaIA = new Elements(null);
+
+        // Variables para almacenar los datos de la IA
+        
 
 
         JDialog dialog = new JDialog();
@@ -32,6 +41,10 @@ public class App {
 
         // Agregar el ActionListener antes de mostrar el diálogo
         btnAdd.addActionListener(e ->  {
+
+            String nombreIA = "";
+            String urlAI = "";
+            float assessmentConverted = 0.0f;
             
             JPanel panel = new JPanel();
             JTextField textField = new JTextField(20);
@@ -47,7 +60,7 @@ public class App {
             );
 
             if (name == JOptionPane.OK_OPTION) {
-                String nombreIA = textField.getText();
+                nombreIA = textField.getText();
                 if (!nombreIA.trim().isEmpty()) {
                     // Aquí puedes procesar el nombre de la IA
                     System.out.println("Nueva IA: " + nombreIA);
@@ -77,7 +90,7 @@ public class App {
             );
 
             if (url == JOptionPane.OK_OPTION) {
-                String urlAI = textFieldURL.getText();
+                urlAI = textFieldURL.getText();
                 if (!urlAI.trim().isEmpty()) {
                     if (!urlAI.startsWith("https://") || !urlAI.startsWith("http://")) {
                         JOptionPane.showMessageDialog(
@@ -116,7 +129,7 @@ public class App {
 
             if (assessment == JOptionPane.OK_OPTION) {
                 try {
-                    float assessmentConverted = Float.parseFloat(textFieldassessment.getText());
+                    assessmentConverted = Float.parseFloat(textFieldassessment.getText());
                     
                     if (assessmentConverted >= 0) {
                         System.out.println("Has introducido la nota");
@@ -133,6 +146,16 @@ public class App {
                 }
             }
 
+            // Añadir la IA a la lista
+            listaIA.addElement(new Element(nombreIA, urlAI, assessmentConverted));
+
+            
+
+        });
+
+        // Agregar el ActionListener al botón de editar
+        btnEdit.addActionListener(e -> {
+            // TODO: Implementar la funcionalidad de editar una IA
         });
 
         // Mostrar todo en el diálogo

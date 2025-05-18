@@ -9,7 +9,11 @@ public class Elements {
     private Scanner scanner = new Scanner(System.in);
 
     public Elements(ArrayList<Element> elements) {
-        this.elements =  new ArrayList<>();
+        if (elements == null) {
+            this.elements = new ArrayList<>();
+        } else {
+            this.elements = elements;
+        }
     }
 
     public void addElement(Element element) {
