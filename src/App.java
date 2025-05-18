@@ -56,7 +56,16 @@ public class App {
                 JOptionPane.PLAIN_MESSAGE
             );
 
-            if (name == JOptionPane.OK_OPTION) {
+            if (name == JOptionPane.CANCEL_OPTION) {
+                JOptionPane.showMessageDialog(
+                    dialog,
+                    "Has cancelado la añadición de la IA",
+                    "Información",
+                    JOptionPane.INFORMATION_MESSAGE
+                );  
+
+                return;
+            } else if (name == JOptionPane.OK_OPTION) {
                 nombreIA = textField.getText();
                 if (!nombreIA.trim().isEmpty()) {
                     // Aquí puedes procesar el nombre de la IA
