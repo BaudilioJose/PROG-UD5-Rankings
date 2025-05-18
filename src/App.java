@@ -140,41 +140,51 @@ public class App {
                 JOptionPane.PLAIN_MESSAGE
             );
 
-            if (assessment == JOptionPane.OK_OPTION) {
-                try {
-                    assessmentIA = Float.parseFloat(textFieldassessment.getText());
-                    
-                    if (assessmentIA >= 0) {
+            if (assessment == JOptionPane.CANCEL_OPTION) {
+                JOptionPane.showMessageDialog(
+                    dialog,
+                    "Has cancelado la añadición de la IA",
+                    "Información",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+
+                return;
+            } else if (assessment == JOptionPane.OK_OPTION) {
+                if (!textFieldassessment.getText().trim().isEmpty()) {
+                    try {
+                        assessmentIA = Float.parseFloat(textFieldassessment.getText());
+                        
+                        if (assessmentIA >= 0) {
+                            JOptionPane.showMessageDialog(
+                                dialog,
+                                "Has introducido la nota: " + assessmentIA,
+                                "Información",
+                                JOptionPane.INFORMATION_MESSAGE
+                            );
+                        } else {
+                            JOptionPane.showMessageDialog(
+                                dialog,
+                                "La valoriación es inválida",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
+                            );
+                        }
+                    } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(
                             dialog,
-                            "Has introducido la nota: " + assessmentIA,
-                            "Información",
-                            JOptionPane.INFORMATION_MESSAGE
-                        );  
-                    } else {
-                        JOptionPane.showMessageDialog(
-                            dialog, "La valoriación es inválida", "Error", JOptionPane.ERROR_MESSAGE);
+                            "Por favor, introduce un número válido",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                        );
                     }
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(
-                        dialog,
-                        "Por favor, introduce un número válido",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE
-                    );
                 }
             }
 
             // Añadir la IA a la lista
             listaIA.addElement(new Element(nombreIA, urlIA, assessmentIA));
 
-            
-
         });
 
-        
-       
-        
 
         // Agregar el ActionListener al botón de editar
         btnEdit.addActionListener(e -> {
