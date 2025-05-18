@@ -90,25 +90,32 @@ public class App {
                     JOptionPane.OK_CANCEL_OPTION
                 );
 
-                if (url == JOptionPane.OK_OPTION) {
+                if (url == JOptionPane.CANCEL_OPTION) {
+                    JOptionPane.showMessageDialog(
+                        dialog,
+                        "Has cancelado la añadición de la IA",
+                        "Información",
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+            
+                    isUrlValid = true;
+                    return;
+                } else if (url == JOptionPane.OK_OPTION) {
                     if (!textFieldURL.getText().trim().isEmpty()) {
                         if (textFieldURL.getText().startsWith("https://") || textFieldURL.getText().startsWith("http://")) {
+                            urlIA = textFieldURL.getText();
                             isUrlValid = true;
+                        } else {
+                            JOptionPane.showMessageDialog(
+                                dialog,
+                                "Por favor, introduce una URL válida con http:// o https://",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
                         }
-                    } else {
-                        JOptionPane.showMessageDialog(
-                            dialog,
-                            "Por favor, introduce una URL válida con http:// o https://",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE
-                        );
                     }
-
                 }
             }
         
-
-
 
             // Obtener puntuación
             JPanel panelAssessment = new JPanel();
@@ -129,9 +136,15 @@ public class App {
                     assessmentIA = Float.parseFloat(textFieldassessment.getText());
                     
                     if (assessmentIA >= 0) {
-                        System.out.println("Has introducido la nota");
+                        JOptionPane.showMessageDialog(
+                            dialog,
+                            "Has introducido la nota: " + assessmentIA,
+                            "Información",
+                            JOptionPane.INFORMATION_MESSAGE
+                        );  
                     } else {
-                        System.out.println("La valoriación es inválida");
+                        JOptionPane.showMessageDialog(
+                            dialog, "La valoriación es inválida", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(
