@@ -251,6 +251,18 @@ public class App {
             
         });
 
+        btnDelete.addActionListener(e -> {
+            // Introducir el nombre de la IA a eliminar
+            String nombreIA = JOptionPane.showInputDialog(
+                dialog,
+                "Introduce el nombre de la IA a eliminar:",
+                "Eliminar IA",
+                JOptionPane.PLAIN_MESSAGE
+            );
+
+            eliminarIA(nombreIA, listaIA, dialog);
+        });
+
         btnExit.addActionListener(e -> {
             System.exit(0);
         });
@@ -351,7 +363,28 @@ public class App {
         }
     }
 
-    public static void eliminarIA(String nombreIA, Elements listaIA) {
+    public static void eliminarIA(String nombreIA, Elements listaIA, JDialog dialog) {
+        if (buscarIA(nombreIA, listaIA)) {
+            int eliminar = JOptionPane.showConfirmDialog(
+                dialog,
+                "Desea eliminar la IA " + nombreIA + "?",
+                "Eliminar IA",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+            );
+
+            if (eliminar == JOptionPane.YES_OPTION) {
+                listaIA.deleteElement(nombreIA);
+                return;
+            }
+        } else {
+            JOptionPane.showMessageDialog(
+                dialog,
+                "No existen IAs para eliminar",
+                "Información",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+        }
     }
 
     // Función para mostrar las mejores ias
