@@ -256,6 +256,17 @@ public class App {
         });
         
         btnShow.addActionListener(e -> {
+
+            if (listaIA.getElements().isEmpty()) {
+                JOptionPane.showMessageDialog(
+                    dialog,
+                    "No hay IAs para mostrar",
+                    "Información",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+                return;
+            }
+
             JOptionPane.showMessageDialog(
                 dialog,
                 mostrarIAs(listaIA),
