@@ -86,7 +86,7 @@ public class App {
             JTextField textFieldURL = new JTextField(20);
             panelURL.add(new JLabel("URL de la IA (debe comenzar con https:// o http://):"));
             panelURL.add(textFieldURL);
-            textFieldURL.setToolTipText("Ejemplo: https://www.misia.com");
+            textFieldURL.setToolTipText("Ejemplo: https://www.chatgpt.com");
 
             boolean isUrlValid = false;
             
@@ -196,9 +196,59 @@ public class App {
                 JOptionPane.PLAIN_MESSAGE
             );
 
-            
 
-            editarIA(nombreIA, listaIA);
+            if (buscarIA(nombreIA, listaIA)) {
+                JOptionPane.showMessageDialog(
+                    dialog,
+                    "La IA existe",
+                    "Información",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+
+                JPanel panelEditName = new JPanel();
+                JTextField textFieldEditName = new JTextField(20);
+                panelEditName.add(new JLabel("Nombre de la IAs:"));
+                panelEditName.add(textFieldEditName);
+
+                boolean nombreValido = false;
+
+
+                int editName = JOptionPane.showConfirmDialog(
+                    dialog,
+                    panelEditName,
+                    "Introduce el nuevo nombre de la IA",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.PLAIN_MESSAGE
+                );
+
+                while (!nombreValido) {
+                    if (editName == JOptionPane.CANCEL_OPTION) {
+                        JOptionPane.showMessageDialog(
+                            dialog,
+                            "Has cancelado la edición de la IA",
+                            "Información",
+                            JOptionPane.INFORMATION_MESSAGE
+                        );
+                        nombreValido = true;
+                        break;
+                    } else if (editName == JOptionPane.OK_OPTION) {
+                        nombreIA = textFieldEditName.getText();
+                        if (!nombreIA.trim().isEmpty()) {
+                            nombreValido = true;
+                            editarIA(nombreIA, listaIA);
+                        } else {
+                            JOptionPane.showMessageDialog(
+                                dialog,
+                                "Por favor, introduce un nombre válido",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
+                            );
+                        }
+                    }
+                }
+                
+            }
+            
         });
 
         // Mostrar todo en el diálogo
