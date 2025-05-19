@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import net.salesianos.ripadbaisor.element.Elements;
 import net.salesianos.ripadbaisor.element.Element;
-import java.util.ArrayList;
+
 
 public class App {
     private static String nombreIA = "";
