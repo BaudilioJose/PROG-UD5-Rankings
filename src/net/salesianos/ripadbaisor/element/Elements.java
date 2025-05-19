@@ -65,16 +65,19 @@ public class Elements {
     }
 
     public void showElements() {
-
         if (elements.isEmpty()) {
             System.out.println("No hay elementos en la lista");
             return;
         }
         
+        System.out.println("\n=== Lista de IAs ===");
         for (Element e : elements) {
-            System.out.println(e);
+            System.out.println("\nNombre: " + e.getName());
+            System.out.println("URL: " + e.getUrl()); 
+            System.out.println("Valoración: " + e.getAssessment());
+            System.out.println("-------------------");
         }
-
+        System.out.println("\nTotal de IAs: " + elements.size());
     }
 
 
