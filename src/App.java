@@ -299,12 +299,7 @@ public class App {
                 return;
             }
 
-            JOptionPane.showMessageDialog(
-                dialog,
-                mostrarIAs(listaIA),
-                "Top IAs",
-                JOptionPane.INFORMATION_MESSAGE
-            );
+            mostrarIAs(listaIA, dialog);
             
             
         });
@@ -411,14 +406,19 @@ public class App {
     }
 
     // Función para mostrar las mejores ias
-    public static String mostrarIAs (Elements listaIA) {
+    
+ public static void mostrarIAs (Elements listaIA, JDialog dialog) {
 
-        String resultado = "";
-        for (Element e : listaIA.getElements()) {
-            resultado += e.getName() + " - " + e.getUrl() + " - " + e.getAssessment() + "\n";
-        }
-
-        return resultado;
+    if (listaIA.getElements().isEmpty()) {
+        JOptionPane.showMessageDialog(
+            dialog,
+            "No hay IAs para mostrar",
+            "Información",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    } else {
+        listaIA.showElements();
     }
+}
     
 }
