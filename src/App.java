@@ -188,6 +188,17 @@ public class App {
 
         // Agregar el ActionListener al botón de editar
         btnEdit.addActionListener(e -> {
+
+            if (listaIA.getElements().isEmpty()) {
+                JOptionPane.showMessageDialog(
+                    dialog,
+                    "No existen IAs para editar",
+                    "Información",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+                return;
+            }
+
             // Obtener el nombre a editar
             String nombreIA = JOptionPane.showInputDialog(
                 dialog,
@@ -252,6 +263,15 @@ public class App {
         });
 
         btnDelete.addActionListener(e -> {
+            if (listaIA.getElements().isEmpty()) {
+                JOptionPane.showMessageDialog(
+                    dialog,
+                    "No existen IAs para eliminar",
+                    "Información",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+                return;
+            }
             // Introducir el nombre de la IA a eliminar
             String nombreIA = JOptionPane.showInputDialog(
                 dialog,
@@ -364,6 +384,9 @@ public class App {
     }
 
     public static void eliminarIA(String nombreIA, Elements listaIA, JDialog dialog) {
+
+        
+
         if (buscarIA(nombreIA, listaIA)) {
             int eliminar = JOptionPane.showConfirmDialog(
                 dialog,
