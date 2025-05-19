@@ -251,6 +251,20 @@ public class App {
             
         });
 
+        btnExit.addActionListener(e -> {
+            System.exit(0);
+        });
+        
+        btnShow.addActionListener(e -> {
+            JOptionPane.showMessageDialog(
+                dialog,
+                mostrarIAs(listaIA),
+                "Top IAs",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            
+            
+        });
         // Mostrar todo en el diálogo
         dialog.getContentPane().add(mainPanel);
         dialog.pack();
@@ -329,6 +343,15 @@ public class App {
     public static void eliminarIA(String nombreIA, Elements listaIA) {
     }
 
+    // Función para mostrar las mejores ias
+    public static String mostrarIAs (Elements listaIA) {
 
+        String resultado = "";
+        for (Element e : listaIA.getElements()) {
+            resultado += e.getName() + " - " + e.getUrl() + " - " + e.getAssessment() + "\n";
+        }
+
+        return resultado;
+    }
     
 }
