@@ -2,6 +2,9 @@ package net.salesianos.ripadbaisor.element;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.*;
+import java.awt.GridLayout;
+import java.awt.*;
 
 public class Elements {
     
@@ -65,19 +68,42 @@ public class Elements {
     }
 
     public void showElements() {
+        JDialog dialog = new JDialog();
+        dialog.setTitle("Lista de IAs");
+        dialog.setModal(true);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
         if (elements.isEmpty()) {
-            System.out.println("No hay elementos en la lista");
-            return;
+            JLabel emptyLabel = new JLabel("No hay elementos en la lista");
+            mainPanel.add(emptyLabel);
+        } else {
+            for (Element e : elements) {
+                JPanel elementPanel = new JPanel();
+                elementPanel.setLayout(new GridLayout(3, 1));
+                elementPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+
+                elementPanel.add(new JLabel("Nombre: " + e.getName()));
+                elementPanel.add(new JLabel("URL: " + e.getUrl()));
+                elementPanel.add(new JLabel("Valoración: " + e.getAssessment()));
+
+                mainPanel.add(elementPanel);
+                mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+            }
+
+            JLabel totalLabel = new JLabel("Total de IAs: " + elements.size());
+            mainPanel.add(totalLabel);
         }
+
+        JScrollPane scrollPane = new JScrollPane(mainPanel);
+        dialog.add(scrollPane);
         
-        System.out.println("\n=== Lista de IAs ===");
-        for (Element e : elements) {
-            System.out.println("\nNombre: " + e.getName());
-            System.out.println("URL: " + e.getUrl()); 
-            System.out.println("Valoración: " + e.getAssessment());
-            System.out.println("-------------------");
-        }
-        System.out.println("\nTotal de IAs: " + elements.size());
+        dialog.setSize(400, 500);
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
     }
 
 
